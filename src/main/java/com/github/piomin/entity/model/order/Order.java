@@ -20,7 +20,7 @@ public class Order implements Serializable {
     private Integer customerId;
     private Integer productId;
     private int amount;
-    private int productCount;
+    private int productsCount;
     @Enumerated
     private OrderStatus status = OrderStatus.NEW;
     private String source;
