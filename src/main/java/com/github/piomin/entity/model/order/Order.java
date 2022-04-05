@@ -23,4 +23,6 @@ public class Order implements Serializable {
     private int productCount;
     @Enumerated
     private OrderStatus status = OrderStatus.NEW;
+    private String source;
+    private String rejectedService;
 }
