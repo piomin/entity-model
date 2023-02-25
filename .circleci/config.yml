@@ -21,7 +21,7 @@ jobs:
           command: |
             APP_VERSION=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout)
             echo -n $APP_VERSION
-            echo 'export APP_VERSION_ENV_VAR=1.2.3' >> "$BASH_ENV"
+            echo 'export APP_VERSION_ENV_VAR='$APP_VERSION >> "$BASH_ENV"
       - gh/install
       - run:
           name: Print App Version
