@@ -35,7 +35,7 @@ workflows:
           context: SonarCloud
           post-steps:
             - gh/release:
-                tag: << parameters.app-version >>
+                tag: $APP_VERSION
                 title: The initial release
                 context:
                   - GitHub
