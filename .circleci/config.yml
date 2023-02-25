@@ -24,8 +24,9 @@ jobs:
       - gh/install
       - run:
           name: Print App Version
-          command:
+          command: |
             echo -n << parameters.app-version >>
+            echo -n $APP_VERSION
 
 workflows:
   maven_test:
