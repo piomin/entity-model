@@ -1,5 +1,8 @@
 version: 2.1
 
+orbs:
+  gh: circleci/github-cli@2.0
+
 jobs:
   build:
     parameters:
@@ -22,14 +25,6 @@ jobs:
       - run:
           command: >
             echo -n ${<< parameters.app-version >>}
-
-executors:
-  jdk:
-    docker:
-      - image: 'cimg/openjdk:11.0'
-
-orbs:
-  gh: circleci/github-cli@1.0
 
 workflows:
   maven_test:
