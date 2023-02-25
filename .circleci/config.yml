@@ -18,6 +18,10 @@ jobs:
           command: |
             APP_VERSION=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout)
             echo -n $APP_VERSION
+      - gh/install
+      - run:
+          command: >
+            echo -n ${<< parameters.app-version >>}
 
 executors:
   jdk:
@@ -25,7 +29,6 @@ executors:
       - image: 'cimg/openjdk:11.0'
 
 orbs:
-  maven: circleci/maven@1.4.1
   gh: circleci/github-cli@1.0
 
 workflows:
@@ -33,14 +36,3 @@ workflows:
     jobs:
       - build:
           context: SonarCloud
-          post-steps:
-            - gh/release
-      - gh/release:
-          tag: $APP_VERSION
-          title: The initial release
-          context:
-            - GitHub
-          filters:
-            branches:
-              only:
-                - master
