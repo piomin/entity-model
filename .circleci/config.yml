@@ -21,12 +21,12 @@ jobs:
           command: |
             APP_VERSION=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout)
             echo -n $APP_VERSION
-            export APP_VERSION=$APP_VERSION
+            echo 'export APP_VERSION_ENV_VAR="$APP_VERSION"' >> "$BASH_ENV"
       - gh/install
       - run:
           name: Print App Version
           command: |
-            echo ${APP_VERSION}
+            echo ${APP_VERSION_ENV_VAR}
 
 workflows:
   maven_test:
