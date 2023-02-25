@@ -34,12 +34,13 @@ workflows:
       - build:
           context: SonarCloud
           post-steps:
-            - gh/release:
-                tag: $APP_VERSION
-                title: The initial release
-                context:
-                  - GitHub
-                filters:
-                  branches:
-                    only:
-                      - master
+            - gh/release
+#      - gh/release
+#          tag: $APP_VERSION
+#          title: The initial release
+#          context:
+#            - GitHub
+#          filters:
+#            branches:
+#              only:
+                - master
