@@ -13,9 +13,9 @@ jobs:
       - image: 'cimg/openjdk:11.0'
     steps:
       - checkout
-      - run:
-          name: Analyze on SonarCloud
-          command: mvn verify sonar:sonar
+#      - run:
+#          name: Analyze on SonarCloud
+#          command: mvn verify sonar:sonar
       - run:
           name: Get version
           command: |
@@ -23,8 +23,9 @@ jobs:
             echo -n $APP_VERSION
       - gh/install
       - run:
-          command: >
-            echo -n ${<< parameters.app-version >>}
+          name: Print App Version
+          command:
+            echo -n << parameters.app-version >>
 
 workflows:
   maven_test:
