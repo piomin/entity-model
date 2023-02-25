@@ -33,15 +33,13 @@ workflows:
     jobs:
       - build:
           context: SonarCloud
-      - gh/release:
-#          notes-file: changelog.md
-          tag: << parameters.app-version >>
-          title: The initial release
-          requires:
-            - maven/test
-          context:
-            - GitHub
-          filters:
-            branches:
-              only:
-                - master
+          post-steps:
+            - gh/release:
+                tag: << parameters.app-version >>
+                title: The initial release
+                context:
+                  - GitHub
+                filters:
+                  branches:
+                    only:
+                      - master
