@@ -2,8 +2,8 @@ version: 2.1
 
 parameters:
   app-version:
-    type: string
-    default: 1.0.0
+    type: env_var_name
+    default: APP_VERSION
 
 #commands:
 #  sayhello:
@@ -41,7 +41,9 @@ workflows:
           executor: jdk
           post-steps:
             - run:
-                command: mvn help:evaluate -Dexpression=project.version -q -DforceStdout > ${<< parameters.app-version >>}
+                command: |
+                  VERSION=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout)
+                  echo -n $VERSION
       - build:
           context: SonarCloud
       - gh/release:
