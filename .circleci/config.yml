@@ -21,6 +21,7 @@ jobs:
           command: |
             APP_VERSION=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout)
             echo -n $APP_VERSION
+            export APP_VERSION=$APP_VERSION
       - gh/install
       - run:
           name: Print App Version
