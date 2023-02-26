@@ -37,5 +37,5 @@ jobs:
 workflows:
   maven_test:
     jobs:
-      - build
-#          context: GitHub
+      - build:
+          context: GitHub
