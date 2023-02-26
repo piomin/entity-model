@@ -1,24 +1,5 @@
 version: 2.1
 
-jobs:
-  build:
-    parameters:
-      app-version:
-        type: env_var_name
-        default: APP_VERSION
-    docker:
-      - image: 'cimg/openjdk:11.0'
-    steps:
-      - checkout
-      - run:
-          name: Analyze on SonarCloud
-          command: mvn verify sonar:sonar
-      - run:
-          name: Get version
-          command: |
-            APP_VERSION=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout)
-            echo -n $APP_VERSION
-
 executors:
   jdk:
     docker:
@@ -26,21 +7,9 @@ executors:
 
 orbs:
   maven: circleci/maven@1.4.1
-  gh: circleci/github-cli@1.0
 
 workflows:
   maven_test:
     jobs:
-      - build:
-          context: SonarCloud
-          post-steps:
-            - gh/release
-      - gh/release:
-          tag: $APP_VERSION
-          title: The initial release
-          context:
-            - GitHub
-          filters:
-            branches:
-              only:
-                - master
+      - maven/test:
+          executor: jdk
