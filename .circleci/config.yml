@@ -31,7 +31,7 @@ jobs:
           command: |
             echo ${APP_VERSION_ENV_VAR}
             echo ${GITHUB_TOKEN}
-            gh release create ${APP_VERSION_ENV_VAR} -d --verify-tag
+            gh release create ${APP_VERSION_ENV_VAR} -d
           name: Create Release
 
 workflows:
