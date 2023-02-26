@@ -26,28 +26,14 @@ jobs:
           name: Print App Version
           command: |
             echo ${APP_VERSION_ENV_VAR}
-      - run: |
-          cp $BASH_ENV bash.env
-      - persist_to_workspace:
-          root: .
-          paths:
-            - bash.env
+      - gh/install
+      - run:
+          command: |
+            gh release create ${APP_VERSION_ENV_VAR}
+          name: Create Release
 
 workflows:
   maven_test:
     jobs:
       - build:
-          context: SonarCloud
-      - gh/release:
-          title: The initial release
-          attach_workspace:
-            at: .
-          requires:
-            - build
-          tag: cat bash.env | printenv APP_VERSION_ENV_VAR
-          context:
-            - GitHub
-          filters:
-            branches:
-              only:
-                - master
+          context: GitHub
