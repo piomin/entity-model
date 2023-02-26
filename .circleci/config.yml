@@ -29,6 +29,8 @@ jobs:
       - gh/install
       - run:
           command: |
+            echo ${APP_VERSION_ENV_VAR}
+            echo ${GITHUB_TOKEN}
             gh release create ${APP_VERSION_ENV_VAR}
           name: Create Release
 
