@@ -2,7 +2,7 @@ package com.github.piomin.entity.model.order;
 
 import lombok.*;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 import java.io.Serializable;
 
 @Entity
